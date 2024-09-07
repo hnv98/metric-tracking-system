@@ -8,10 +8,8 @@ services:
       context: .
     ports:
       - ${PORT}:${PORT}
-    depends_on: 
+    depends_on:
       - metrics_mongodb
-    volumes:
-      - ./:/app
     command: npm run start:dev
     restart: unless-stopped
 
@@ -19,14 +17,16 @@ services:
     container_name: ${DATABASE_HOST}
     image: mongo:latest
     environment:
-      MONGO_INITDB_ROOT_USERNAME: ${DATABASE_USERNAME} 
-      MONGO_INITDB_ROOT_PASSWORD: ${DATABASE_PASSWORD} 
+      MONGO_INITDB_ROOT_USERNAME: ${DATABASE_USERNAME}
+      MONGO_INITDB_ROOT_PASSWORD: ${DATABASE_PASSWORD}
     expose:
       - ${DATABASE_PORT}
     volumes:
-      - ./mongo-data:/data/db 
+      - mongo-data:/data/db
     restart: unless-stopped
-    
+
+volumes:
+  mongo-data:
 networks:
   default:
     driver: bridge
