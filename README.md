@@ -1,73 +1,49 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
+# Metric Tracking System
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+## Giới Thiệu
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+Metric Tracking System là một ứng dụng quản lý số liệu giúp người dùng thêm  và theo dõi các số liệu như khoảng cách và nhiệt độ.
 
-## Description
+## Yêu Cầu
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+- **Docker:** Đảm bảo rằng Docker đã được cài đặt trên hệ thống của bạn.
+- **Docker Compose:** Cần Docker Compose để quản lý các dịch vụ Docker.
 
-## Installation
+## Cài Đặt
+
+### 1. Clone Repository
+
+Clone repository của bạn về máy local:
 
 ```bash
-$ npm install
+git clone https://github.com/hnv98/metric-tracking-system.git
 ```
+### 2. Cấu Hình Biến Môi Trường
 
-## Running the app
+Tạo file `.env` trong thư mục gốc của dự án và điền thông tin cấu hình sau:
+
+```env
+PORT=3000
+DATABASE_USERNAME=admin
+DATABASE_PASSWORD=admin
+DATABASE_PORT=27017
+DATABASE_HOST=metrics_mongodb
+DATABASE_NAME=metrics
+DATABASE_URI=mongodb://${DATABASE_USERNAME}:${DATABASE_PASSWORD}@metrics_mongodb:27017
+```
+### 3. Khởi Động Ứng Dụng
+
+Sử dụng Docker Compose để xây dựng các container Docker cho ứng dụng:
 
 ```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
+docker-compose --env-file .env up 
 ```
+Lệnh này sẽ khởi động các dịch vụ được định nghĩa trong file docker-compose.yml, bao gồm:
+metrics_api_dev: Api-service.
+metrics_mongodb: MongoDB.
 
-## Test
+### 4. Kiểm Tra Tài Liệu API
 
-```bash
-# unit tests
-$ npm run test
+Tài liệu API của bạn có thể được truy cập qua Swagger UI tại: [http://localhost:3000/api](http://localhost:3000/api)
 
-# e2e tests
-$ npm run test:e2e
 
-# test coverage
-$ npm run test:cov
-```
-
-## Support
-
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](LICENSE).
